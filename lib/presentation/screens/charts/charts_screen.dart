@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:project_management_app/domain/models/project_model.dart';
 import 'package:project_management_app/domain/repositories/project_repository.dart';
 import 'package:provider/provider.dart';
 
 class ChartsScreen extends StatelessWidget {
+  const ChartsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final projectRepo = context.watch<ProjectRepository>();

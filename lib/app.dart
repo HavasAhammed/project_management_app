@@ -6,11 +6,13 @@ import 'package:project_management_app/data/dataresources/project_remote_data_so
 import 'package:project_management_app/domain/repositories/auth_repository.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
 import 'package:project_management_app/domain/repositories/project_repository.dart';
-import 'package:project_management_app/view/screens/auth/login_screen.dart';
-import 'package:project_management_app/view/screens/projects/projects_screen.dart';
+import 'package:project_management_app/presentation/screens/auth/login_screen.dart';
+import 'package:project_management_app/presentation/screens/projects/projects_screen.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

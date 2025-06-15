@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
-import 'package:project_management_app/view/widgets/video_player_widget.dart';
+import 'package:project_management_app/presentation/widgets/video_player_widget.dart';
 import 'package:provider/provider.dart';
 
 class MediaUploadScreen extends StatefulWidget {

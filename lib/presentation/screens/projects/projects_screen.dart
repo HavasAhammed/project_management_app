@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:project_management_app/domain/models/project_model.dart';
 import 'package:project_management_app/domain/repositories/auth_repository.dart';
 import 'package:project_management_app/domain/repositories/project_repository.dart';
-import 'package:project_management_app/view/screens/charts/charts_screen.dart';
-import 'package:project_management_app/view/screens/map/map_screen.dart';
-import 'package:project_management_app/view/screens/projects/project_details_screen.dart';
-import 'package:project_management_app/view/widgets/project_card.dart';
+import 'package:project_management_app/presentation/screens/charts/charts_screen.dart';
+import 'package:project_management_app/presentation/screens/map/map_screen.dart';
+import 'package:project_management_app/presentation/screens/projects/project_details_screen.dart';
+import 'package:project_management_app/presentation/widgets/project_card.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});

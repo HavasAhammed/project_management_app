@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:project_management_app/domain/models/project_model.dart';
 import 'package:project_management_app/domain/repositories/project_repository.dart';
-import 'package:project_management_app/view/screens/projects/project_details_screen.dart';
+import 'package:project_management_app/presentation/screens/projects/project_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class MapScreen extends StatelessWidget {

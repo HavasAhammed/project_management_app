@@ -47,6 +47,7 @@ dependencies:
   file_picker: ^10.2.0
   permission_handler: ^12.0.0+1
   provider: ^6.0.5
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
