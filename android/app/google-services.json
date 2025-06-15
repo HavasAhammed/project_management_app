@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672933342054",
+    "project_id": "project-management-app-aac75",
+    "storage_bucket": "project-management-app-aac75.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672933342054:android:f43d763a6c414d8e14b6a7",
+        "android_client_info": {
+          "package_name": "com.example.project_management_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg2YgDTRD5QxGE4lRD9oj6FiRNwo5ouss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
