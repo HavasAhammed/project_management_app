@@ -7,15 +7,20 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.colors,
     this.showBack = true,
+    this.actions,
+    this.centerTitle = true,
   });
 
   final String title;
   final List<Color>? colors;
   final bool showBack;
+  final List<Widget>? actions;
+  final bool centerTitle;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      
       leading:
           showBack
               ? IconButton(
@@ -36,9 +41,10 @@ class CustomAppBar extends StatelessWidget {
         title,
         style: AppTextStyle.appText17Bold.apply(color: Colors.white),
       ),
-      centerTitle: true,
+      centerTitle: centerTitle,
       backgroundColor: Colors.transparent,
       elevation: 0,
+      actions: actions,
     );
   }
 }

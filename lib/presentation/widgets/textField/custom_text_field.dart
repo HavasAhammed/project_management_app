@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.hintText,
     this.isReset = false,
+    this.onChanged,
   });
 
   final TextEditingController? controller;
@@ -23,6 +24,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final bool isReset;
+  final void Function(String)? onChanged;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -56,6 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           obscureText: _obscureText,
           style: AppTextStyle.appText13Regular,
           keyboardType: widget.keyboardType,
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: AppTextStyle.appText13Regular.apply(

@@ -1,78 +1,123 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/core/constants/height_and_width.dart';
 import 'package:project_management_app/core/theme/app_colors.dart';
+import 'package:project_management_app/core/theme/app_text_style.dart';
 
-showCustomDialog(
+void showCustomDialog(
   BuildContext context, {
-  String? title,
-  @required String? message,
+  required String title,
+  required String message,
   VoidCallback? onCompleted,
-  bool useRootNavigator = false,
-  bool showCancelButton = false,
-  String? button1,
-  String? button2,
-  VoidCallback? onCancelled,
-  Color? button1BgColor,
-  Color? button2BgColor,
-  Color? button1Color,
-  Color? button2Color,
-  Color? messageColor,
+  bool isLoading = false,
+  String cancelLabel = 'Cancel',
+  String confirmLabel = 'OK',
+  Color? confirmColor,
+  Color? confirmLabelColor,
 }) {
   showDialog(
     context: context,
-    useRootNavigator: useRootNavigator,
     barrierDismissible: false,
     builder:
-        (context) => AlertDialog(
-          title: Center(
-            child: Text(title ?? "", style: TextStyle(color: Colors.black)),
+        (_) => AlertDialog(
+          backgroundColor: Colors.white, // Set card color to white
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          content: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Text(
-              message!,
-              style: TextStyle(color: messageColor ?? Colors.red[800]),
-            ),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 24,
+            horizontal: 32,
           ),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: button2BgColor ?? AppColors.primaryColor,
-                    elevation: 0,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColors.primaryRedColor,
+                    width: 1,
                   ),
-                  child: Text(
-                    button2 ?? "No",
-                    style: TextStyle(color: button2Color ?? Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    if (onCancelled != null) {
-                      onCancelled();
-                    }
-                  },
                 ),
-                kWidth(8),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: button1BgColor ?? Colors.red[800],
-                  ),
-                  child: Text(
-                    button1 ?? "Yes",
-                    style: TextStyle(color: button1Color ?? Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    if (onCompleted != null) {
-                      onCompleted();
-                    }
-                  },
+                padding: const EdgeInsets.all(20),
+                child: Icon(
+                  Icons.logout,
+                  color: AppColors.primaryRedColor,
+                  size: 32,
                 ),
-              ],
-            ),
-          ],
+              ),
+              kHeight(16),
+              Text(
+                title,
+                style: AppTextStyle.appText15Bold.apply(
+                  color: AppColors.textGreyColor,
+                ),
+              ),
+              kHeight(8),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.appText11Regular.apply(color: Colors.black),
+              ),
+              kHeight(24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.buttonGreyColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        cancelLabel,
+                        style: AppTextStyle.appText13Bold,
+                      ),
+                    ),
+                  ),
+                  kWidth(12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            confirmColor ?? AppColors.primaryRedColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed:
+                          isLoading
+                              ? null
+                              : () {
+                                Navigator.pop(context);
+                                if (onCompleted != null) onCompleted();
+                              },
+                      child:
+                          isLoading
+                              ? SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                              : Text(
+                                confirmLabel,
+                                style: AppTextStyle.appText13Bold.apply(
+                                  color: confirmLabelColor ?? Colors.white,
+                                ),
+                              ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
   );
 }

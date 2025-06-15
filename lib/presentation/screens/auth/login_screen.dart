@@ -39,7 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: CustomAppBar(title: 'Login', showBack: false),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+
         child: Center(
           child: SingleChildScrollView(
             child: Column(
