@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
-import 'package:project_management_app/presentation/widgets/video_player_widget.dart';
+import 'package:project_management_app/presentation/widgets/others/video_player_widget.dart';
 import 'package:project_management_app/presentation/widgets/button/primary_button.dart';
 import 'package:project_management_app/presentation/widgets/appBar/custom_sub_app_bar.dart';
 import 'package:path/path.dart' as p;

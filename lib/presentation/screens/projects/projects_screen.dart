@@ -10,7 +10,7 @@ import 'package:project_management_app/domain/repositories/project_repository.da
 import 'package:project_management_app/presentation/screens/charts/charts_screen.dart';
 import 'package:project_management_app/presentation/screens/map/map_screen.dart';
 import 'package:project_management_app/presentation/screens/projects/project_details_screen.dart';
-import 'package:project_management_app/presentation/widgets/project_card.dart';
+import 'package:project_management_app/presentation/widgets/others/project_card.dart';
 import 'package:project_management_app/presentation/widgets/dialog/custom_dialog.dart';
 
 class ProjectsScreen extends StatelessWidget {

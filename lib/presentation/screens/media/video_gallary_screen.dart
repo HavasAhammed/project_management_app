@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:project_management_app/core/theme/app_colors.dart';
 import 'package:project_management_app/presentation/screens/media/media_upload_screen.dart';
 import 'package:project_management_app/presentation/widgets/loader/circular_loading.dart';
-import 'package:project_management_app/presentation/widgets/media_grid_item.dart';
+import 'package:project_management_app/presentation/widgets/others/media_grid_item.dart';
 
 class VideoGalleryScreen extends StatelessWidget {
   final String projectId;

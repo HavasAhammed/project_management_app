@@ -48,14 +48,14 @@ class ProjectCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 26,
-                    height: 26,
+                    width: 30,
+                    height: 30,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         SizedBox(
-                          width: 26,
-                          height: 26,
+                          width: 30,
+                          height: 30,
                           child: CircularProgressIndicator(
                             value: progress,
                             strokeWidth: 3,
