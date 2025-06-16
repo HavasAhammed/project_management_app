@@ -110,6 +110,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 labelText: 'Email',
                 hintText: 'Enter Your Email',
                 prefixIcon: Icons.email_outlined,
+                keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter your email';
