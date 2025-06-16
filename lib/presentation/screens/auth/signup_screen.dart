@@ -53,7 +53,7 @@ class _SignupScreenState extends State<SignupScreen> {
           message: "Signup successful!",
           isSuccess: true,
         );
-        Navigator.pop(context); // Or navigate to another screen
+        Navigator.pop(context);
       } else {
         CustomSnackBar.show(
           context: context,

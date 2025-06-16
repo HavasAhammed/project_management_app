@@ -5,7 +5,6 @@ import 'package:project_management_app/domain/models/project_model.dart';
 class ProjectRemoteDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  
   Future<List<Project>> getProjects() async {
     final snapshot = await _firestore.collection('projects').get();
 

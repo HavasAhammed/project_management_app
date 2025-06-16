@@ -6,7 +6,6 @@ import 'package:project_management_app/core/local/hive_boxes.dart';
 class MediaRemoteDataSource {
   Future<void> uploadMedia(String projectId, File file, String type) async {
     try {
-      // Ensure Hive is initialized
       if (!Hive.isBoxOpen(HiveBoxes.imagesBox)) {
         final dir = await getApplicationDocumentsDirectory();
         Hive.init(dir.path);
@@ -16,7 +15,6 @@ class MediaRemoteDataSource {
       final box = await Hive.openBox<List>(boxName);
       final List<String> currentList =
           box.get(projectId, defaultValue: <String>[])!.cast<String>();
-      // Save file locally
       final localDir = await getApplicationDocumentsDirectory();
       final ext = type == 'image' ? 'jpg' : 'mp4';
       final fileName = '${DateTime.now().millisecondsSinceEpoch}.$ext';

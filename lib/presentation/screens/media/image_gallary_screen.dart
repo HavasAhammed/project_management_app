@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class ImageGalleryScreen extends StatelessWidget {
   final String projectId;
 
-  const ImageGalleryScreen({required this.projectId});
+  const ImageGalleryScreen({super.key, required this.projectId});
 
   @override
   Widget build(BuildContext context) {

@@ -23,9 +23,8 @@ class Project {
       name: map['name'],
       description: map['description'],
       progress: map['progress'],
-      location: map['location'] != null
-          ? Location.fromMap(map['location'])
-          : null,
+      location:
+          map['location'] != null ? Location.fromMap(map['location']) : null,
       imageUrls: List<String>.from(map['imageUrls'] ?? []),
       videoUrls: List<String>.from(map['videoUrls'] ?? []),
     );
@@ -51,16 +50,10 @@ class Location {
   Location({required this.latitude, required this.longitude});
 
   factory Location.fromMap(Map<String, dynamic> map) {
-    return Location(
-      latitude: map['latitude'],
-      longitude: map['longitude'],
-    );
+    return Location(latitude: map['latitude'], longitude: map['longitude']);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'latitude': latitude,
-      'longitude': longitude,
-    };
+    return {'latitude': latitude, 'longitude': longitude};
   }
 }

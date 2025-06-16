@@ -11,8 +11,6 @@ class VideoGalleryScreen extends StatelessWidget {
 
   const VideoGalleryScreen({super.key, required this.projectId});
 
-  // No longer needed: fetchVideoUrls
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_management_app/data/dataresources/project_remote_data_sorce.dart';
+import 'package:project_management_app/data/dataresources/project_remote_data_source.dart';
 import 'package:project_management_app/domain/models/project_model.dart';
 
 class ProjectRepository extends ChangeNotifier {

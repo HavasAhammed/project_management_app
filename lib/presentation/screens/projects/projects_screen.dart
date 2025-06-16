@@ -57,7 +57,7 @@ class ProjectsScreen extends StatelessWidget {
                   message: 'Do you really want to logout your account?',
                   confirmLabel: 'Logout',
                   cancelLabel: 'Cancel',
-                  
+
                   onCompleted: () {
                     context.read<AuthRepository>().logout();
                   },
@@ -75,7 +75,7 @@ class ProjectsScreen extends StatelessWidget {
               controller: null,
               isReset: true,
               labelText: '',
-              hintText: 'Search projects...',
+              hintText: 'Search Projects...',
               prefixIcon: Icons.search,
               onChanged: (value) {
                 context.read<ProjectRepository>().searchProjects(value);

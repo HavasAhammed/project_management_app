@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:project_management_app/core/constants/height_and_width.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
 import 'package:project_management_app/presentation/widgets/others/video_player_widget.dart';
 import 'package:project_management_app/presentation/widgets/button/primary_button.dart';
@@ -32,7 +33,6 @@ class _MediaUploadScreenState extends State<MediaUploadScreen> {
       type: widget.isImage ? FileType.image : FileType.video,
     );
     if (result != null && result.files.single.path != null) {
-      // Copy file to app's local directory for consistency
       final appDir = await getApplicationDocumentsDirectory();
       final ext = widget.isImage ? 'jpg' : 'mp4';
       final fileName = '${DateTime.now().millisecondsSinceEpoch}.$ext';
@@ -101,7 +101,7 @@ class _MediaUploadScreenState extends State<MediaUploadScreen> {
                     size: 40,
                   ),
                 ),
-                const SizedBox(height: 24),
+                kHeight(24),
                 if (_selectedFile != null)
                   Stack(
                     alignment: Alignment.topRight,
@@ -163,7 +163,7 @@ class _MediaUploadScreenState extends State<MediaUploadScreen> {
                       ),
                     ),
                   ),
-                const SizedBox(height: 32),
+                kHeight(32),
                 PrimaryButton(
                   label: 'Select File',
                   width: MediaQuery.of(context).size.width / 1.5,
@@ -173,7 +173,7 @@ class _MediaUploadScreenState extends State<MediaUploadScreen> {
                   height: 48,
                   icon: const Icon(Icons.upload_file, color: Colors.white),
                 ),
-                const SizedBox(height: 16),
+                kHeight(16),
                 if (_selectedFile != null)
                   PrimaryButton(
                     label: _isUploading ? 'Uploading...' : 'Upload',
@@ -182,7 +182,6 @@ class _MediaUploadScreenState extends State<MediaUploadScreen> {
                     buttonColor: const Color(0xFF30AE4A),
                     labelColor: Colors.white,
                     height: 48,
-                    // icon: const Icon(Icons.cloud_upload, color: Colors.white),
                   ),
               ],
             ),

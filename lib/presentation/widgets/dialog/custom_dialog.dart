@@ -19,7 +19,7 @@ void showCustomDialog(
     barrierDismissible: false,
     builder:
         (_) => AlertDialog(
-          backgroundColor: Colors.white, // Set card color to white
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

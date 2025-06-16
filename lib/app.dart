@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_management_app/core/constants/app_constants.dart';
 import 'package:project_management_app/data/dataresources/auth_remote_data_source.dart';
 import 'package:project_management_app/data/dataresources/media_remote_data_source.dart';
-import 'package:project_management_app/data/dataresources/project_remote_data_sorce.dart';
+import 'package:project_management_app/data/dataresources/project_remote_data_source.dart';
 import 'package:project_management_app/domain/repositories/auth_repository.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
 import 'package:project_management_app/domain/repositories/project_repository.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Project Management App',
+            title: AppConstants.appName,
             theme: ThemeData(
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,

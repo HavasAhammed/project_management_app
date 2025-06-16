@@ -21,7 +21,6 @@ class MediaGridItem extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _MediaGridItemState createState() => _MediaGridItemState();
 }
 
@@ -35,7 +34,7 @@ class _MediaGridItemState extends State<MediaGridItem> {
 
       if (widget.isImage) {
         if (isLocalFile) {
-          await Gal.putImage(widget.mediaUrl); // ✅ pass path directly
+          await Gal.putImage(widget.mediaUrl);
         } else {
           final response = await Dio().get(
             widget.mediaUrl,
@@ -45,7 +44,7 @@ class _MediaGridItemState extends State<MediaGridItem> {
           final fileName = widget.mediaUrl.split('/').last;
           final tempFile = File('${tempDir.path}/$fileName');
           await tempFile.writeAsBytes(response.data);
-          await Gal.putImage(tempFile.path); // ✅ path, not File
+          await Gal.putImage(tempFile.path);
         }
       } else {
         if (isLocalFile) {
@@ -62,10 +61,9 @@ class _MediaGridItemState extends State<MediaGridItem> {
           await Gal.putVideo(tempFile.path);
         }
       }
-
       CustomSnackBar.show(
         context: context,
-        message: 'Saved to gallery!',
+        message: 'Saved to Gallery!',
         isSuccess: true,
       );
     } catch (e) {
@@ -111,9 +109,8 @@ class _MediaGridItemState extends State<MediaGridItem> {
             setState(() {
               _isVideoInitialized = true;
               _controller.setLooping(true);
-              _controller.setVolume(1.0); // Enable audio
-              // Do not auto-play
-              _showControls = true; // Show play button overlay by default
+              _controller.setVolume(1.0);
+              _showControls = true;
             });
           })
           .catchError((e) {
@@ -142,18 +139,11 @@ class _MediaGridItemState extends State<MediaGridItem> {
         color: Colors.black.withOpacity(0.3),
         shape: const CircleBorder(),
         child: IconButton(
-          icon: const Icon(
-            Icons.download,
-            color: Colors.white,
-            size: 20,
-          ), // smaller icon
+          icon: const Icon(Icons.download, color: Colors.white, size: 20),
           onPressed: _downloadMedia,
           tooltip: 'Download',
-          constraints: const BoxConstraints(
-            minWidth: 30,
-            minHeight: 30,
-          ), // smaller touch target
-          padding: EdgeInsets.zero, // tight padding
+          constraints: const BoxConstraints(minWidth: 30, minHeight: 30),
+          padding: EdgeInsets.zero,
         ),
       ),
     );

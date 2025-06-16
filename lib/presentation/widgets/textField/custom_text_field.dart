@@ -88,22 +88,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderRadius: BorderRadius.circular(7),
               borderSide: BorderSide.none,
             ),
-            // enabledBorder: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(7),
-            //   borderSide: BorderSide.none,
-            // ),
-            // focusedBorder: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(7),
-            //   borderSide: BorderSide(color: AppColors.primaryBlueColor, width: 1.5),
-            // ),
-            // errorBorder: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(7),
-            //   borderSide: BorderSide(color: AppColors.primaryRedColor, width: 1),
-            // ),
           ),
-          validator:
-              widget.validator ??
-              (v) => v == null || v.trim().isEmpty ? 'Name is required' : null,
+          validator: widget.validator,
         ),
       ],
     );

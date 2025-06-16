@@ -13,7 +13,6 @@ class AuthRepository {
     try {
       return await authRemoteDataSource.login(email, password);
     } on FirebaseAuthException catch (e) {
-      // Handle specific error codes for user-friendly messages
       String msg;
       switch (e.code) {
         case 'user-not-found':
