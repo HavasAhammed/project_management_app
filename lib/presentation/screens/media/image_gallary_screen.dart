@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/core/theme/app_colors.dart';
 import 'package:project_management_app/domain/repositories/medi_repository.dart';
 import 'package:project_management_app/presentation/screens/media/media_upload_screen.dart';
+import 'package:project_management_app/presentation/widgets/loader/circular_loading.dart';
 import 'package:project_management_app/presentation/widgets/media_grid_item.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +14,11 @@ class ImageGalleryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: AppColors.primaryBlueColor,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         onPressed: () {
           Navigator.push(
             context,
@@ -24,28 +29,33 @@ class ImageGalleryScreen extends StatelessWidget {
             ),
           );
         },
+        child: Icon(Icons.add, color: AppColors.whiteColor, size: 28),
       ),
       body: StreamBuilder<List<String>>(
         stream: context.read<MediaRepository>().getImages(projectId),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return GridView.builder(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return MediaGridItem(
-                  mediaUrl: snapshot.data![index],
-                  isImage: true,
-                );
-              },
-            );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return loader();
           }
-          return Center(child: CircularProgressIndicator());
+          if (snapshot.hasError) {
+            return Center(child: Text('Error fetching images'));
+          }
+          final images = snapshot.data ?? [];
+          if (images.isEmpty) {
+            return Center(child: Text('No images available'));
+          }
+          return GridView.builder(
+            padding: EdgeInsets.all(8),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+              return MediaGridItem(mediaUrl: images[index], isImage: true);
+            },
+          );
         },
       ),
     );

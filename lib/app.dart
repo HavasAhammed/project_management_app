@@ -15,45 +15,56 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<AuthRepository>(
-          create:
-              (_) =>
-                  AuthRepository(authRemoteDataSource: AuthRemoteDataSource()),
-        ),
-
-        ChangeNotifierProvider<ProjectRepository>(
-          create:
-              (_) => ProjectRepository(
-                projectRemoteDataSource: ProjectRemoteDataSource(),
-              ),
-        ),
-
-        Provider<MediaRepository>(
-          create:
-              (_) => MediaRepository(
-                mediaRemoteDataSource: MediaRemoteDataSource(),
-              ),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Project Management App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              return snapshot.hasData ? ProjectsScreen() : LoginScreen();
-            }
-            return Scaffold(body: Center(child: CircularProgressIndicator()));
-          },
-        ),
-      ),
+    return FutureBuilder(
+      future: MediaRepository.initHive(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const MaterialApp(
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          );
+        }
+        return MultiProvider(
+          providers: [
+            Provider<AuthRepository>(
+              create:
+                  (_) => AuthRepository(
+                    authRemoteDataSource: AuthRemoteDataSource(),
+                  ),
+            ),
+            ChangeNotifierProvider<ProjectRepository>(
+              create:
+                  (_) => ProjectRepository(
+                    projectRemoteDataSource: ProjectRemoteDataSource(),
+                  ),
+            ),
+            Provider<MediaRepository>(
+              create:
+                  (_) => MediaRepository(
+                    mediaRemoteDataSource: MediaRemoteDataSource(),
+                  ),
+            ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Project Management App',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  return snapshot.hasData ? ProjectsScreen() : LoginScreen();
+                }
+                return const Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_management_app/domain/repositories/medi_repository.dart';
+import 'package:provider/provider.dart';
+import 'package:project_management_app/core/theme/app_colors.dart';
 import 'package:project_management_app/presentation/screens/media/media_upload_screen.dart';
+import 'package:project_management_app/presentation/widgets/loader/circular_loading.dart';
 import 'package:project_management_app/presentation/widgets/media_grid_item.dart';
 
 class VideoGalleryScreen extends StatelessWidget {
@@ -8,26 +11,16 @@ class VideoGalleryScreen extends StatelessWidget {
 
   const VideoGalleryScreen({super.key, required this.projectId});
 
-  Future<List<String>> fetchVideoUrls(String projectId) async {
-    final doc =
-        await FirebaseFirestore.instance
-            .collection('projects')
-            .doc(projectId)
-            .get();
-
-    if (doc.exists && doc.data() != null) {
-      final data = doc.data()!;
-      final videoUrls = List<String>.from(data['videoUrls'] ?? []);
-      return videoUrls;
-    }
-    return [];
-  }
+  // No longer needed: fetchVideoUrls
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: AppColors.primaryBlueColor,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         onPressed: () {
           Navigator.push(
             context,
@@ -38,20 +31,21 @@ class VideoGalleryScreen extends StatelessWidget {
             ),
           );
         },
+        child: Icon(Icons.add, color: AppColors.whiteColor, size: 28),
       ),
-      body: FutureBuilder<List<String>>(
-        future: fetchVideoUrls(projectId),
+      body: StreamBuilder<List<String>>(
+        stream: Provider.of<MediaRepository>(
+          context,
+          listen: false,
+        ).getVideos(projectId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return loader();
           }
-
           if (snapshot.hasError) {
             return Center(child: Text('Error fetching videos'));
           }
-
           final videoUrls = snapshot.data ?? [];
-
           if (videoUrls.isEmpty) {
             return Center(child: Text('No videos available'));
           }

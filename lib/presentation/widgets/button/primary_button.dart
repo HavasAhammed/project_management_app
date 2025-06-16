@@ -16,6 +16,7 @@ class PrimaryButton extends StatelessWidget {
     this.labelColor,
     this.borderColor,
     this.isBoarder = false,
+    this.icon,
     required this.onPressed,
   });
 
@@ -29,6 +30,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? borderColor;
   final bool isLoading;
   final bool isBoarder;
+  final Widget? icon;
   final void Function()? onPressed;
 
   @override
@@ -47,11 +49,18 @@ class PrimaryButton extends StatelessWidget {
         child:
             isLoading
                 ? loader(color: AppColors.whiteColor, size: 30)
-                : Text(
-                  label,
-                  style: AppTextStyle.appText16Bold.apply(
-                    color: labelColor ?? AppColors.whiteColor,
-                  ),
+                : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (icon != null) ...[icon!, const SizedBox(width: 8)],
+                    Text(
+                      label,
+                      style: AppTextStyle.appText16Bold.apply(
+                        color: labelColor ?? AppColors.whiteColor,
+                      ),
+                    ),
+                  ],
                 ),
       ),
     );
