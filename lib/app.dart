@@ -9,6 +9,7 @@ import 'package:project_management_app/domain/repositories/medi_repository.dart'
 import 'package:project_management_app/domain/repositories/project_repository.dart';
 import 'package:project_management_app/presentation/screens/auth/login_screen.dart';
 import 'package:project_management_app/presentation/screens/projects/projects_screen.dart';
+import 'package:project_management_app/presentation/widgets/loader/circular_loading.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,9 +21,7 @@ class MyApp extends StatelessWidget {
       future: MediaRepository.initHive(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return const MaterialApp(
-            home: Scaffold(body: Center(child: CircularProgressIndicator())),
-          );
+          return MaterialApp(home: Scaffold(body: loader()));
         }
         return MultiProvider(
           providers: [
@@ -58,9 +57,7 @@ class MyApp extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.active) {
                   return snapshot.hasData ? ProjectsScreen() : LoginScreen();
                 }
-                return const Scaffold(
-                  body: Center(child: CircularProgressIndicator()),
-                );
+                return Scaffold(body: loader());
               },
             ),
           ),
